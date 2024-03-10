@@ -22,6 +22,8 @@ namespace ReviewWebAPI.Migrations
                     table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
+            
+
             migrationBuilder.CreateTable(
                 name: "Countries",
                 columns: table => new
