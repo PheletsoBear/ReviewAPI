@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ReviewWebAPI.Data;
+using ReviewWebAPI.Repositories.Implementation;
+using ReviewWebAPI.Repositories.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("PokemonConnectionString")); //Injecting the connection connection string
 });
 
+builder.Services.AddScoped<IPokemonRepository, PokemonRepository>();
+/*
+builder.Services.AddScoped<>();
+builder.Services.AddScoped<>();
+builder.Services.AddScoped<>();
+builder.Services.AddScoped<>();
+builder.Services.AddScoped<>();
+*/
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

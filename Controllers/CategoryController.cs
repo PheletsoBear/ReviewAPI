@@ -7,5 +7,8 @@ namespace ReviewWebAPI.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
+
+        
+
     }
 }
