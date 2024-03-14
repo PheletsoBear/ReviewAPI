@@ -14,9 +14,21 @@ namespace ReviewWebAPI.Repositories.Implementation
             this.dbContext = dbContext;
         }
 
+        public async Task<Pokemon> CreateAsync(Pokemon pokemon)
+        {
+            await dbContext.AddAsync(pokemon);
+            await dbContext.SaveChangesAsync();
+            return pokemon;
+        }
+
         public async Task<IEnumerable<Pokemon>> GetAllAsync()
         {
             return await dbContext.Pokemon.ToListAsync();
+        }
+
+        public async Task<Pokemon?> GetByIdAsync(int id)
+        {
+            return await dbContext.Pokemon.FirstOrDefaultAsync(p => p.Id == id);
         }
     }
 }
