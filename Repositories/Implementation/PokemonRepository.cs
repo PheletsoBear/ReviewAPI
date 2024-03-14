@@ -21,6 +21,32 @@ namespace ReviewWebAPI.Repositories.Implementation
             return pokemon;
         }
 
+        public async Task<Pokemon> DeleteAsync(int id)
+        {
+            var existingPokemon = await dbContext.Pokemon.FirstOrDefaultAsync(x => x.Id == id);
+            if (existingPokemon is null)
+            {
+                return null;
+            }
+            else
+            {
+                dbContext.Pokemon.Remove(existingPokemon);
+                await dbContext.SaveChangesAsync();
+                return existingPokemon;
+            }
+        }
+
+        public Task<IEnumerable<Pokemon>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Pokemon?> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+   
+
         public async Task<IEnumerable<Pokemon>> GetAllAsync()
         {
             return await dbContext.Pokemon.ToListAsync();
@@ -30,5 +56,6 @@ namespace ReviewWebAPI.Repositories.Implementation
         {
             return await dbContext.Pokemon.FirstOrDefaultAsync(p => p.Id == id);
         }
+
     }
 }

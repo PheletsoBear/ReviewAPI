@@ -7,6 +7,10 @@ namespace ReviewWebAPI.Repositories.Interface
         Task<IEnumerable<Pokemon>> GetAllAsync();
         Task<Pokemon?> GetByIdAsync(int id);
         Task<Pokemon> CreateAsync(Pokemon pokemon);
+        Task<Pokemon> DeleteAsync(int id);
+       
+
+      
 
     }
 }

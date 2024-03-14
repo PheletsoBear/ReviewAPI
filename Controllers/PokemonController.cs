@@ -14,7 +14,7 @@ namespace ReviewWebAPI.Controllers
     {
         private readonly IPokemonRepository pokemonRepository;
 
-        public PokemonController( IPokemonRepository pokemonRepository)
+        public PokemonController(IPokemonRepository pokemonRepository)
         {
             this.pokemonRepository = pokemonRepository;
         }
@@ -34,7 +34,7 @@ namespace ReviewWebAPI.Controllers
                     Id = pokemon.Id,
                     BirthDate = pokemon.BirthDate,
                     Name = pokemon.Name
-                });   
+                });
             }
 
             return Ok(reponse);
@@ -48,7 +48,7 @@ namespace ReviewWebAPI.Controllers
         {
             var existingPokemon = await pokemonRepository.GetByIdAsync(id);
 
-            if(existingPokemon == null)
+            if (existingPokemon == null)
             {
                 return NotFound();
             }
@@ -82,6 +82,30 @@ namespace ReviewWebAPI.Controllers
             };
             return Ok(response);
         }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task<IActionResult> DeletePokemon(int id)
+        {
+            var Pokemon = await pokemonRepository.DeleteAsync(id);
+            if(Pokemon is null)
+            {
+                return NotFound();
+
+            }
+
+            var response = new PokemonDTO
+            {
+                Id = Pokemon.Id,
+                Name = Pokemon.Name,
+                BirthDate = Pokemon.BirthDate
+            };
+
+            return Ok(response);
+
+        }
+
+       
 
 
 
